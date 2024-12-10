@@ -15,5 +15,4 @@ export interface Pokemon {
   image: string;
   ytbUrl: string;
   favorite: boolean;
-  // add other Pokemon properties as needed
 }
