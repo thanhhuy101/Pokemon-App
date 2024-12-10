@@ -1,0 +1,84 @@
+<!-- Carousel Section -->
+<div class="video-carousel mb-4">
+    <div class="carousel-item" *ngFor="let url of ytbUrls">
+        <iframe [src]="url | safeUrl" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<!-- Upload CSV Section -->
+<div class="upload-section mb-4">
+    <input type="file" #fileInput accept=".csv" style="display: none" (change)="uploadCSV($event)">
+    <button mat-raised-button color="primary" [disabled]="isLoading" (click)="fileInput.click()">
+        {{ isLoading ? 'Uploading...' : 'Upload Pokemon CSV' }}
+    </button>
+</div>
+
+<!-- Search and Filter Section -->
+<div class="search-filter-section mb-4">
+    <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search Pokemon</mat-label>
+        <input matInput [(ngModel)]="searchTerm" (keyup)="applyFilters()">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Type</mat-label>
+        <mat-select [(ngModel)]="selectedType" (selectionChange)="applyFilters()">
+            <mat-option value="">All</mat-option>
+            <mat-option *ngFor="let type of pokemonTypes" [value]="type">{{type}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Speed Range</mat-label>
+        <mat-select [(ngModel)]="selectedSpeed" (selectionChange)="applyFilters()">
+            <mat-option value="">All</mat-option>
+            <mat-option value="0-50">0-50</mat-option>
+            <mat-option value="51-100">51-100</mat-option>
+            <mat-option value="101+">101+</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox [(ngModel)]="isLegendary" (change)="applyFilters()">
+        Legendary Only
+    </mat-checkbox>
+</div>
+
+<!-- Pokemon List Section -->
+<div class="pokemon-list">
+    <h2 class="pokemon-title">My List Pokemon</h2>
+    <div class="pokemon-grid">
+        <div *ngFor="let pokemon of pokemons" class="pokemon-card">
+            <div class="card">
+                <div class="card-content">
+                    <img [src]="pokemon.image" class="card-img-top" [alt]="pokemon.name">
+                    <div class="card-body">
+                        <h5 class="card-title">{{pokemon.name}}</h5>
+                        <p class="card-text">
+                            Type: {{pokemon.type1}}
+                            <!-- <span *ngIf="pokemon.type2">, {{pokemon.type2}}</span> -->
+                        </p>
+
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button mat-raised-button color="primary" class="favorite-button"
+                        (click)="toggleFavorite(pokemon.id)">
+                        <mat-icon>favorite</mat-icon>
+                        Favorite
+                    </button>
+                    <button mat-raised-button color="primary" class="view-details-button"
+                        (click)="viewPokemonDetails(pokemon)">
+                        <mat-icon>search</mat-icon>
+                        View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-paginator [length]="totalPokemons" [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 50, 100]"
+        (page)="onPageChange($event)" [showFirstLastButtons]="true">
+    </mat-paginator>
+</div>
+
+<app-footer></app-footer>

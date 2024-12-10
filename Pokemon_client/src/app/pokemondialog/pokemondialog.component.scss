@@ -1,0 +1,18 @@
+.pokemon-details {
+    display: flex;
+    gap: 20px;
+
+    .detail-image {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
+    }
+
+    .details-info {
+        flex: 1;
+
+        p {
+            margin: 8px 0;
+        }
+    }
+}

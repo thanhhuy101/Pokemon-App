@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{pokemon.name}} Details</h2>
+<mat-dialog-content>
+    <div class="pokemon-details">
+        <img [src]="pokemon.image" [alt]="pokemon.name" class="detail-image">
+        <div class="details-info">
+            <p><strong>Name:</strong> {{pokemon.name}}</p>
+            <p><strong>Type 1:</strong> {{pokemon.type1}}</p>
+            <p *ngIf="pokemon.type2"><strong>Type 2:</strong> {{pokemon.type2}}</p>
+            <p><strong>Total:</strong> {{pokemon.total}}</p>
+            <p><strong>HP:</strong> {{pokemon.hp}}</p>
+            <p><strong>Attack:</strong> {{pokemon.attack}}</p>
+            <p><strong>Defense:</strong> {{pokemon.defense}}</p>
+            <p><strong>Sp. Attack:</strong> {{pokemon.spAttack}}</p>
+            <p><strong>Sp. Defense:</strong> {{pokemon.spDefense}}</p>
+            <p><strong>Speed:</strong> {{pokemon.speed}}</p>
+            <p><strong>Generation:</strong> {{pokemon.generation}}</p>
+            <p><strong>Legendary:</strong> {{pokemon.legendary}}</p>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

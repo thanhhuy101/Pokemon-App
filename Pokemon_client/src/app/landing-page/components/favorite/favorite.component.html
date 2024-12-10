@@ -1,0 +1,44 @@
+<div class="pokemon-list">
+    <h2 class="favorite-title">My Favorite Pokemon</h2>
+
+    <!-- Favorite Pokemons Grid -->
+    <div class="pokemon-grid" *ngIf="favoritePokemons.length > 0">
+        <div *ngFor="let pokemon of favoritePokemons" class="pokemon-card">
+            <div class="card">
+                <div class="card-content">
+                    <img [src]="pokemon.image" class="card-img-top" [alt]="pokemon.name">
+                    <div class="card-body">
+                        <h5 class="card-title">{{pokemon.name}}</h5>
+                        <p class="card-text">
+                            Type: {{pokemon.type1}}
+                            <!-- <span *ngIf="pokemon.type2">, {{pokemon.type2}}</span> -->
+                        </p>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <button mat-raised-button color="primary" class="delete-button"
+                        (click)="removeFromFavorites(pokemon)">
+                        <mat-icon>delete</mat-icon>
+                        Remove
+                    </button>
+                    <button mat-raised-button color="primary" class="view-details-button"
+                        (click)="viewPokemonDetails(pokemon)">
+                        <mat-icon>search</mat-icon>
+                        View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty state message -->
+    <div class="empty-state" *ngIf="favoritePokemons.length === 0">
+        <mat-icon class="empty-icon">favorite_border</mat-icon>
+        <p>You haven't added any Pokemon to your favorites yet!</p>
+        <button mat-raised-button color="primary" routerLink="/">
+            Browse Pokemon
+        </button>
+    </div>
+</div>
+
+<app-footer></app-footer>
